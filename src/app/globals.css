@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.signup_wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
