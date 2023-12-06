@@ -44,10 +44,9 @@ export default function ProfilePage() {
 
     return(
         <div className="signup_wrapper">
-            <h1>Profile</h1>
-            <a href={`/profile/${userid}`}>View Profile</a>
-            <br />
-            <button onClick={logout}>Logout</button>
+            <a href={`/profile/${userid}`} className="button-60">View Profile</a>
+{/*             
+            <button onClick={logout} className="button-39">Logout</button> */}
         </div>
     )
 }
