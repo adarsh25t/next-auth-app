@@ -1,10 +1,13 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, {useState,useEffect } from "react";
 
-export default function verifyEmail() {
+export default function VerifyEmail() {
 
+    const router = useRouter()
     const [token,setToken] = useState<String>('');
+    const [loading,setloading] = useState<Boolean>(false);
 
     useEffect(() => {
         const url = window.location.search.split("token=")[1];
@@ -14,20 +17,24 @@ export default function verifyEmail() {
 
     const handleVerify = async () => {
         try {
-            
-        console.log(token);
-         const respose = await axios.post('/api/users/verifyemail',{token});
-         console.log(respose);
-         
+            setloading(true)
+            const respose = await axios.post('/api/users/verifyemail',{token});
+            if (respose.data.success) {
+                setloading(false)
+                router.push('/login')
+            }
             
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
     return(
         <div className="signup_wrapper">
-            <button className="btn btn-info" onClick={handleVerify}>Verify Your Email</button>
+            {!loading ? 
+                <button className="btn btn-info" onClick={handleVerify}>Verify Your Email</button> : 
+                (<div className="loading_wrapper"><span className="loader_1"></span></div>)
+            }
         </div>
     )
 }
