@@ -63,9 +63,8 @@ export default function LoginPage() {
         {!loading ? (<button onClick={handleSubmit} className="btn btn-block button-6">
           Login
         </button>) : (<div className="loading_wrapper"><span className="loader_1"></span></div>)}
-        <Link href={"/signup"} className="link">
-          Create new account
-        </Link>
+        <Link href={"/signup"} className="link">Create new account</Link>
+        <Link href={"/forgotPassword"} className="link">Forgot password</Link>
       </div>
     </div>
   );

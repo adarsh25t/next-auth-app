@@ -39,7 +39,7 @@ export const sendEmail = async ({ email, emailType, userId }: props) => {
             to: email,
             subject: emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password",
             html: `<p>
-                Click <a href="http://localhost:3000/verifyemail?token=${hashedToken}"> here </a> to 
+                Click <a href="http://localhost:3000/${ emailType === "VERIFY" ? "verifyemail" : "resetpassword"}?token=${hashedToken}"> here </a> to 
                 ${emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password"}
             </p>`
         }
