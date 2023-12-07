@@ -2,6 +2,7 @@ import { connect } from "@/dbConfig/dbConfig";
 import User from '@/models/userModel'
 import { NextRequest,NextResponse } from "next/server";
 import bcryptjs from 'bcryptjs';
+import { sendEmail } from "@/helpers/mailer";
 
 
 connect();
@@ -14,7 +15,7 @@ export async function POST(request: NextRequest) {
 
         // CHECK USER ALREADY EXISTS
         const user = await User.findOne({email});
-        console.log("user is there",user);
+        
         if (user) {
             return NextResponse.json({error: "user already exist"},{status: 400})
         }
@@ -31,6 +32,8 @@ export async function POST(request: NextRequest) {
         });
 
         const savedUser = await newUser.save();
+
+        await sendEmail({email,emailType: "VERIFY",userId: String(newUser._id)})
         
         return NextResponse.json({
             message:"Successfylly create new user",
