@@ -16,8 +16,10 @@ export default function SignUp() {
 
   const handleSubmit = async () => {
     try {
+      setloading(true)
       const response = await axios.post("/api/users/signup", user);
       if (response.data.success) {
+        setloading(false)
         router.push("/login");
       }
     } catch (error: any) {
