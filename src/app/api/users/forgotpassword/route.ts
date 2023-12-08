@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     try {
 
         const reqBody = await request.json();
-        const { email } = reqBody as { email: String }
+        const { email } = reqBody as { email: string }
 
         let user = await User.findOne({email});
         
