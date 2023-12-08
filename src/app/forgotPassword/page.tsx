@@ -16,7 +16,8 @@ export default function ForgotPassword() {
         try {
             setloading(true)
             const response = await axios.post('/api/users/forgotpassword',{email})
-
+            console.log(response);
+            
             if (response.data.success) {
                 setloading(false)
                 setMessage("update password token send to your email")

@@ -1,7 +1,10 @@
+import { connect } from "@/dbConfig/dbConfig";
 import { sendEmail } from "@/helpers/mailer";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 
+
+connect()
 
 export async function POST(request: NextRequest) {
     try {
@@ -10,7 +13,8 @@ export async function POST(request: NextRequest) {
         const { email } = reqBody as { email: String }
 
         let user = await User.findOne({email});
-
+        
+        
         if (!user) {
             return NextResponse.json({
                 message: "User is not found!",

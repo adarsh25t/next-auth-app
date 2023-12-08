@@ -1,28 +1,28 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ResetPassword() {
 
     const router = useRouter()
     const [password, setPassword] = useState<string | number>("")
-    const [confirmPassword,SetConfirmPassword] = useState<string | number>("");
+    const [confirmPassword,SetConfirmPassword] = useState<string>("");
     const [loading,setloading] = useState<Boolean>(false);
     const [token,setToken] = useState<string>("")
 
-    useEffect(() => {
+    useEffect(() => {   
         const url = window.location.search.split("token=")[1];
         setToken(url);
 
-    },[])
+    },[]) 
 
     const handleSubmit = async () => {
         try {
             setloading(true)
-            const response = await axios.post('/api/users/resetpassword',{token})
-
+            const response = await axios.post('/api/users/resetpassword',{token,password})
+            
             if (response.data.success) {
                 setloading(false)
                 router.push('/login')

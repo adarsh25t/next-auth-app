@@ -1,5 +1,6 @@
 import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
+import bcryptjs from 'bcryptjs';
 import { NextRequest, NextResponse } from "next/server";
 
 connect();
@@ -18,12 +19,15 @@ export async function POST(request: NextRequest) {
             })
         }
 
+        // HASH PASSWORD
+        const salt = await bcryptjs.genSalt(10);
+        const hashedpassword = await bcryptjs.hash(password,salt);
 
-        // user.forgotPasswordToken = undefined
-        // user.forgotPasswordTokenExpiry = undefined
-
-        // await user.save()
-
+        user.forgotPasswordToken = undefined
+        user.forgotPasswordTokenExpiry = undefined
+        user.password = hashedpassword;
+        await user.save()
+        
         return NextResponse.json({
             message: "Successfully update your password",
             success: true
