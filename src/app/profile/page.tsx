@@ -19,7 +19,7 @@ export default function ProfilePage() {
         try {
 
             const response = await axios.get('/api/users/profile');
-            setUserid(response.data.userid)
+            setUserid(response.data.userid.id)
             
         } catch (error: any) {
             toast.error(error.message)

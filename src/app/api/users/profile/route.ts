@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
             message:"Successfully Get Profile",
             success: true,
-            userid: userToken.id
+            userid: userToken
         })
 
     } catch (error: any) {
