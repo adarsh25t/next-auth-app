@@ -8,7 +8,7 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { token,password } = reqBody as {token: string, password: string | number} 
+        const { token,password } = reqBody as {token: string, password: string} 
         
         let user = await User.findOne({forgotPasswordToken: token, forgotPasswordTokenExpiry: { $gt: Date.now() }})
 
