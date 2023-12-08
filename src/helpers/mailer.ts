@@ -3,15 +3,15 @@ import nodemailer from 'nodemailer';
 import bcryptjs from 'bcryptjs';
 
 interface props {
-    email: String,
-    emailType: String,
-    userId: String
+    email: string,
+    emailType: string,
+    userId: string
 }
 
 export const sendEmail = async ({ email, emailType, userId }: props) => {
     try {
 
-        const hashedToken = await bcryptjs.hash(userId, 10);
+        const hashedToken: any = await bcryptjs.hash(userId, 10);
 
         if (emailType === "VERIFY") {
             await User.findByIdAndUpdate(userId, {
